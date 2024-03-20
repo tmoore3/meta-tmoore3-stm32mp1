@@ -42,8 +42,8 @@ git config --list
 The following example shows how to download the STM32MP1 Distribution Package OpenSTLinux distribution.
 
 ```bash
-mkdir -p yocto-stm32mp1
-cd yocto-stm32mp1
+mkdir -p ~/yocto-stm32mp1
+cd ~/yocto-stm32mp1
 repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-6.1-yocto-mickledore-mp1-v23.06.21
 repo sync
 ```
@@ -53,4 +53,29 @@ When this process is completed, the source code is checked out into the director
 ```bash
 cd layers
 git clone git@github.com:tmoore3/meta-tmoore3-stm32mp1.git
+```
+
+# Yocto Build
+
+## Build configurations
+
+ST provides a script ***envsetup.sh***, To use the script, the name of the specific machine to be built for needs to be specified. The script will set up a directory and the configuration files for the specified machine.
+
+The syntax for the  ***envsetup.sh*** script is shown below:
+
+```bash
+DISTRO=openstlinux-weston MACHINE=<machine> source layers/meta-st/scripts/envsetup.sh
+```
+
+Take stm32mp157f-dk2 board as example, we can use following command to setup the Yocto build environment.
+
+```bash
+cd ~/yocto-stm32mp1
+DISTRO=openstlinux-weston MACHINE=stm32mp15-disco source layers/meta-st/scripts/envsetup.sh
+```
+
+## Add Layer
+
+```bash
+bitbake-layers add-layer ../layers/meta-tmoore3-stm32mp1/
 ```

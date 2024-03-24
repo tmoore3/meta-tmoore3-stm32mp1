@@ -1,0 +1,14 @@
+[Unit]
+Description=USB-IP Bindind
+After=network.target
+Wants=network.target
+ 
+[Service]
+Type=forking
+ExecStartPre=-/sbin/modprobe usbip-core
+ExecStartPre=-/sbin/modprobe usbip-host
+ExecStart=/usr/sbin/usbipd -D
+ExecStop=/usr/sbin/stm32mp_usbip_bind_unbind.sh unload
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,3 @@
+ACTION=="remove", SUBSYSTEM=="usb", RUN+="/usr/sbin/stm32mp_usbip_bind_unbind.sh remove %p"
+
+ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usb", RUN+="/usr/sbin/stm32mp_usbip_bind_unbind.sh add %p"
